@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
   viewState = NotesViewState.display;
   isFilterVisible:boolean = false;
   minDueDate:Date;
-  tomorrow: Date;
 
   notesViewStateRef = NotesViewState;
 
@@ -32,9 +31,8 @@ export class AppComponent implements OnInit {
   ngOnInit():void {
     this.notes = this.notesService.get();
     this.selectedNote = this.notes[0];
-    this.minDueDate = new Date();
     let tomorrowMiliseconds = new Date().setDate((new Date).getDate() + 1);
-    this.tomorrow = new Date(tomorrowMiliseconds);
+    this.minDueDate = new Date(tomorrowMiliseconds);
   }
 
   onSelectedItem(note: Note):void {

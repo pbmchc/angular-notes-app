@@ -19,13 +19,13 @@
         </div>
         <filter-notes [isFilterVisible]="isFilterVisible" (filteredNotes)="filters = $event" (hideForm)="toggleFilterVisibility()"></filter-notes>
         <!--BEGIN: Notes list-->
-        <app-notes-list [notes]="notes" [filters]="filters" [activeItem]="selectedNote" [tomorrow]="tomorrow" (selectedItem)="onSelectedItem($event)" (itemForUpdate)="editNote($event)" (itemForDelete)="deleteNote($event)"></app-notes-list>
+        <app-notes-list [notes]="notes" [filters]="filters" [activeItem]="selectedNote" [tomorrow]="minDueDate" (selectedItem)="onSelectedItem($event)" (itemForUpdate)="editNote($event)" (itemForDelete)="deleteNote($event)"></app-notes-list>
         <!--END: Notes list-->
       </div>
 
       <div class="col-sm-6 col-md-6 col-lg-6">
         <div [ngSwitch]="viewState">
-          <app-note-details *ngSwitchCase="notesViewStateRef.display" [selectedNote]="selectedNote" [tomorrow]="tomorrow"></app-note-details>
+          <app-note-details *ngSwitchCase="notesViewStateRef.display" [selectedNote]="selectedNote" [tomorrow]="minDueDate"></app-note-details>
           <app-create-note *ngSwitchCase="notesViewStateRef.create" (createdItem)="onCreatedItem($event)" (hideForm)="resetNoteViewState()" [minDueDate]="minDueDate"></app-create-note>
           <app-update-note *ngSwitchCase="notesViewStateRef.update" [updatedNote]="updatedNote" [minDueDate]="minDueDate" (updatedItem)="onUpdatedItem($event)" (hideForm)="resetNoteViewState()"></app-update-note>
           <app-delete-note *ngSwitchCase="notesViewStateRef.delete" [deletedNote]="deletedNote" (deletedItem)="onDeletedItem($event)" (hideForm)="resetNoteViewState()"></app-delete-note>
