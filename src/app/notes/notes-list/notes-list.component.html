@@ -1,0 +1,23 @@
+<div class="list-group side__list">
+  <button *ngFor="let note of notes | filterNotes: filters" (click)="selectItem(note)" [ngClass]="{ 'active': note == selectedNote }" [disabled]="note == selectedNote"
+    class="list-group-item">
+      <div>
+        <p>{{ note.title }}</p>
+        <p class="badge">{{ note.createdOn | date: "dd/MM/yyyy HH:mm" }}</p>
+        <b *ngIf="note.content.length > 25" class="pull-right">It is long one</b>
+        <p>Priority: {{ priorityRef[note.priority] }}</p>
+        <p>Due date: {{ note.dueDate | date: "dd/MM/yyyy" }}</p>
+        <button class="btn btn-lg btn-list-action pull-right" (click)="selectItemForDelete(note, $event)">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button>
+        <button class="btn btn-lg btn-list-action pull-right" (click)="selectItemForUpdate(note, $event)">
+          <span  class="glyphicon glyphicon-pencil"></span>
+        </button>
+      </div>
+      <div class="bookmarks">
+        <p *ngIf="note.dueDate.toDateString() == tomorrow.toDateString()" class="bookmarks__bmark bookmarks__bmark--time"><span class="glyphicon glyphicon-time"></span></p>
+        <p *ngIf="note.priority == priorityRef.High" class="bookmarks__bmark bookmarks__bmark--priority"><span class="glyphicon glyphicon-fire"></span></p>
+      </div>
+      </button>
+    <p class="list-group__empty" *ngIf="notes.length == 0">no notes :(</p>
+</div>

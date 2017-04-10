@@ -1,0 +1,10 @@
+<div>
+    <div class="inline" *ngFor="let filter of filters; let index = index;">
+        <ng-container *ngIf="filter">
+        <p class="chip">
+            {{ filter | displayFilter: index }}
+            <span (click)="resetFilter(index)" class="closebtn">&times;</span>
+        </p>
+        </ng-container>
+    </div>
+</div>

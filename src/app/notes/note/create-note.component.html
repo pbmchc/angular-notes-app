@@ -1,0 +1,27 @@
+<div class="panel panel-success">
+    <div class="panel-heading">New note</div>
+    <div class="panel-body">
+        <form #newNoteForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="note-title">Title:</label>
+                <input type="text" [(ngModel)]="newNote.title" required class="form-control" name="note-title" id="note-title">
+            </div>
+            <div class="form-group">
+                <label for="note-content">Note:</label>
+                <textarea [(ngModel)]="newNote.content" required class="form-control new-note__content-input" name="note-content" id="note-content"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="note-priority">Priority:</label>
+                <select required class="form-control" name="note-priority" id="note-priority" [(ngModel)] = "newNote.priority">
+                    <option *ngFor="let priority of (priorities | enum)" [value]="priority.key">{{ priority.value }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="note-due-date">Due date:</label>
+                <input required class="form-control" type="date" [min]="minDueDate | date:'yyyy-MM-dd'" [ngModel] = "newNote.dueDate | date:'yyyy-MM-dd'" (ngModelChange)="newNote.dueDate=$event" name="note-due-date" id="note-due-date">
+            </div>
+            <button type="submit" [disabled]="!newNoteForm.form.valid" class="btn btn-success">Submit</button>
+            <button type="button" class="btn pull-right" (click)="onCancel()">Cancel</button>
+        </form>
+    </div>
+</div>

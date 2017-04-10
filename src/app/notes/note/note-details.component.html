@@ -1,0 +1,32 @@
+<div *ngIf="(selectedNote | json) != '{}'" class="panel panel-default">
+    <div class="panel-heading">
+        <h3>
+            {{ selectedNote.title }}
+        </h3>
+        <h4>
+            {{ selectedNote.createdOn | date: "dd/MM/yyyy HH:mm" }}
+        </h4>
+        <h6>
+            Last updated on: {{ (selectedNote.lastUpdatedOn | date: "dd/MM/yyyy HH:mm") || "-" }}
+        </h6>
+    </div>
+    <div class="panel-body">
+        <p class="text-justify">
+            {{ selectedNote.content }}
+        </p>
+    </div>
+    <div class="panel-body">
+        <p class="text-justify">
+            Priority:
+            <span class="label label-default" [ngClass]="{ 'label-warning': selectedNote.priority == priorityRef.High }">
+                {{ priorityRef[selectedNote.priority] }}
+            </span>
+        </p>
+        <p class="text-justify">
+            Due date:
+            <span class="label label-default" [ngClass]="{ 'label-danger': selectedNote.dueDate.toDateString() == tomorrow.toDateString() }">
+                {{ selectedNote.dueDate | date: "dd/MM/yyyy" }}
+            </span>
+        </p>
+    </div>
+</div>

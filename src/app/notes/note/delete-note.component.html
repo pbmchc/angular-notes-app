@@ -1,0 +1,8 @@
+<div class="panel panel-danger">
+    <div class="panel-heading">Delete  {{ deletedNote.title ? "note" : "notes" }}</div>
+    <div class="panel-body">
+        <p class="text-center">Are you sure you want to delete <b>{{ deletedNote.title || "all your notes" }}</b>?</p><br>
+        <button class="btn btn-md btn-danger" (click)="onDelete()">Delete</button>
+        <button class="btn btn-md pull-right" (click)="onCancel()">Cancel</button>
+    </div>
+</div>

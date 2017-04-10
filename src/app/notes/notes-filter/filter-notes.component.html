@@ -1,0 +1,34 @@
+<div class="list-group side__list">
+    <form #filterForm [hidden]="!isFilterVisible" class="form-horizontal">
+        <div class="form-heading">Filter notes</div>
+        <div class="form-group">
+            <label for="filter-note-title" class="control-label col-sm-2">Title:</label>
+             <div class="col-sm-10">
+                <input [(ngModel)]="filters[0]" (input)="onInputChange()" name="title" id="filter-note-title" type="text" class="form-control">
+             </div>
+        </div>
+        <div class="form-group">
+            <label for="filter-note-duedate" class="control-label col-sm-2">Duedate:</label>
+            <div class="col-sm-10">
+                <input [(ngModel)]="filters[1]" type="date" (input)="onInputChange()" name="duedate" class="form-control" id="filter-note-duedate">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="filter-note-priority" class="control-label col-sm-2">Priority</label>
+            <div class="col-sm-10">
+                <select [(ngModel)]="filters[2]" (change)="onInputChange()" name="priority" class="form-control" id="filter-note-priority">
+                    <option value='' selected>Any</option>
+                    <option *ngFor="let priority of (priorities | enum)" [value]="priority.key">
+                        {{ priority.value }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="text-right">
+            <input value="RESET FILTERS" (click)="onResetForm()" type="button" class="btn btn-xs btn-default">
+            <button (click)="onHideForm()" type="button" class="btn btn-xs btn-default">HIDE <span class="glyphicon glyphicon-menu-up"></span></button>
+        </div>
+    </form>
+    <hr>
+    <filter-breadcrumbs [filters]="filters"></filter-breadcrumbs>
+</div>
